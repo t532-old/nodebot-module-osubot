@@ -1,16 +1,14 @@
 import { safeLoad } from 'js-yaml'
 import { readFileSync } from 'fs'
 import chalk from 'chalk'
-import { modLog } from '../../core/log'
-import analyzer from '../../core/analyzer'
 import { getTest, endTest } from './commands/bpm'
-const { injectionChecker } = safeLoad(readFileSync('config.yml'))
+const { injectionChecker } = safeLoad(readFileSync('config/config.yml'))
 const log = {
     private: {},
     group: {},
     discuss: {},
 }
-const { repeater: config } = safeLoad(readFileSync('config.yml')).osubot
+const { repeater: config } = safeLoad(readFileSync('config/config.yml')).osubot
 const BPM_UNDERFLOW_LIMIT = 40
 const BPM_UNDERFLOW_RESPONSE = '太惨了。'
 const BPM_OVERFLOW_LIMIT = 400
@@ -30,9 +28,9 @@ function repeater(msg) {
         if (log[msg.type][msg.target].count === config.times) {
             const timeout = Math.round(Math.random() * 200000),
                   repeatTarget = log[msg.type][msg.target]
-            modLog('osubot middleware', `attempting to repeat \`${msg.content}' in ${msg.type === 'private' ? chalk.yellow(`${msg.type} ${msg.target}`) : `${msg.type} ${msg.target}`} in ${Math.round(timeout / 1000)} secs`)
+            msg.static().log.modLog('osubot middleware', `attempting to repeat \`${msg.content}' in ${msg.type === 'private' ? chalk.yellow(`${msg.type} ${msg.target}`) : `${msg.type} ${msg.target}`} in ${Math.round(timeout / 1000)} secs`)
             setTimeout(() => { msg.send(repeatTarget.message) }, timeout)
-            analyzer(msg, 'middleware', 'osubotRepeat')
+            msg.static().analyzer(msg, 'middleware', 'osubotRepeat')
         } 
     }
 }

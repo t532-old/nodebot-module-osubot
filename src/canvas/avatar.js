@@ -4,7 +4,6 @@ import { readdirSync, unlinkSync, existsSync } from 'fs'
 // Import local files
 import { promisifyGM, cachepath } from './_util'
 import { res } from '../web'
-import { errorLog } from '../../../core/log'
 
 /**
  * get a user's avatar
@@ -15,18 +14,16 @@ import { errorLog } from '../../../core/log'
  */
 async function getAvatar(uid, avatarDest) {
     try { await res.avatarQuery(uid, avatarDest) }
-    catch { return false }
+    catch { throw new Error('Didn\'t get avatar') }
     try {
         await promisifyGM(
             gm(avatarDest)
             .quality(100)
             .resize(350, 350)
         )
-        return true
     } catch (err) {
-        errorLog(err)
         await clearCachedAvatars(uid)
-        return false
+        throw new Error('Error occured when processing avatar image')
     }
 }
 

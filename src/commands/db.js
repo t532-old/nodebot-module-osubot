@@ -3,7 +3,7 @@ import { DB } from './_messages'
 import { readFileSync } from 'fs'
 import { safeLoad } from 'js-yaml'
 // Initialize settings
-const { operators } = safeLoad(readFileSync('config.yml'))
+const { operators } = safeLoad(readFileSync('config/config.yml'))
 
 export default {
     args: '',

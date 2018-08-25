@@ -4,7 +4,7 @@ import { copyFileSync, existsSync } from 'fs'
 import { sep } from 'path'
 // Import local files
 import { scorify, fillNumberReversed, objDiff } from './_util'
-import { promisify, promisifyGM, cachepath, assetspath } from './_util'
+import { promisifyGM, cachepath, assetspath } from './_util'
 import { getAvatar } from './avatar'
 
 /**
@@ -28,13 +28,15 @@ export default async function drawStat(stat, statPrev) {
         .fill('#0005')
         .drawRectangle(30, 20, 400, 390)
     )
-    if (existsSync(avatarDest) || await getAvatar(uid, avatarDest))
-        await promisifyGM(
-            gm(dest)
-            .quality(100)
-            .composite(avatarDest)
-            .geometry('+40+30')
-        )
+    try {
+        if (existsSync(avatarDest) || await getAvatar(uid, avatarDest))
+            await promisifyGM(
+                gm(dest)
+                .quality(100)
+                .composite(avatarDest)
+                .geometry('+40+30')
+            )
+    } catch { }
     await promisifyGM(
         gm(dest)
         .quality(100)

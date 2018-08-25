@@ -130,4 +130,4 @@ export function promisifyGM(gmO) {
 }
 
 export const cachepath = 'cache/osubot'
-export const assetspath = 'assets/osubot'
+export const assetspath = 'node_modules/nodebot-module-osubot/assets'

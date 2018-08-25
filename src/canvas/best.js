@@ -29,14 +29,16 @@ export default async function drawBest(bp, map, stat, mode = 0) {
     const mapFileDest =  `${cachepath}/mapfile/${bid}.osu`
     const mods = getMods(bp.enabled_mods)
     copyFileSync(`${assetspath}/image/userbg/crecent.jpg`, avatarBGDest)
-    if (existsSync(avatarDest) || await getAvatar(uid, avatarDest))
-        await promisifyGM(
-            gm(avatarBGDest)
-            .quality(100)
-            .composite(avatarDest)
-            .gravity('North')
-            .geometry('+0-50')
-        )
+    try {
+        if (existsSync(avatarDest) || await getAvatar(uid, avatarDest))
+            await promisifyGM(
+                gm(avatarBGDest)
+                .quality(100)
+                .composite(avatarDest)
+                .gravity('North')
+                .geometry('+0-50')
+            )
+    } catch { }
     if (!existsSync(bgDest)) {
         try { await res.bgQuery(sid, bgDest) }
         catch { copyFileSync(`${assetspath}/image/userbg/c${Math.ceil(Math.random() * 5)}.jpg`, bgDest) }

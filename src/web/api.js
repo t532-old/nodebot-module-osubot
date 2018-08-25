@@ -3,7 +3,7 @@ import { format } from 'url'
 import { get } from 'axios'
 import { safeLoad } from 'js-yaml'
 
-const config = safeLoad(readFileSync('config.yml')).osubot
+const config = safeLoad(readFileSync('config/config.yml')).osubot
 
 /**
  * A GET request to the ppy api.
