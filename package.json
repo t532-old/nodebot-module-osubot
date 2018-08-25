@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "babel src -d dist -s --verbose",
-    "install": "npm run build"
+    "prepublish": "npm run build"
   },
   "author": "trustgit",
   "license": "MIT",
