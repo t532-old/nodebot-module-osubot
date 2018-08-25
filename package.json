@@ -8,7 +8,8 @@
     "url": "git+https://gitlab.com/trustgit/nodebot-module-osubot.git"
   },
   "scripts": {
-    "build": "babel src -d dist -s --verbose"
+    "build": "babel src -d dist -s --verbose",
+    "install": "npm run build"
   },
   "author": "trustgit",
   "license": "MIT",
