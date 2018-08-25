@@ -1,9 +1,5 @@
 import { managedb } from '../db'
 import { DB } from './_messages'
-import { readFileSync } from 'fs'
-import { safeLoad } from 'js-yaml'
-// Initialize settings
-const { operators } = safeLoad(readFileSync('config/config.yml'))
 
 export default {
     args: '',
@@ -14,7 +10,7 @@ export default {
      * @param {string[]} type Whether the db will be backuped or recoveried
      */
     async action(msg, {}, [ type ]) {
-        if (operators.includes(msg.param.user_id)) {
+        if (msg.static().config.operators.includes(msg.param.user_id)) {
             await managedb[type]();
             msg.send(`osubot: db: ${DB.SUCC}`)
         } else msg.send(`osubot: db: ${DB.FAIL}`)
