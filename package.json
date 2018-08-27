@@ -9,8 +9,9 @@
   },
   "scripts": {
     "build": "babel src -d dist -s --verbose",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
+  "files": ["*.json", ".babelrc", ".gitignore", ".npmrc", "*.md", "dist/", "src/", "bin/", "assets/", "config/"],
   "author": "trustgit",
   "license": "MIT",
   "bugs": {
