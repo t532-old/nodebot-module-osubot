@@ -1,6 +1,6 @@
 {
   "name": "nodebot-module-osubot",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "module osubot for nodebot",
   "main": "dist/index.js",
   "repository": {
@@ -11,7 +11,18 @@
     "build": "babel src -d dist -s --verbose",
     "prepare": "npm run build"
   },
-  "files": ["*.json", ".babelrc", ".gitignore", ".npmrc", "*.md", "dist/", "src/", "bin/", "assets/", "config/"],
+  "files": [
+    "*.json",
+    ".babelrc",
+    ".gitignore",
+    ".npmrc",
+    "*.md",
+    "dist/",
+    "src/",
+    "bin/",
+    "assets/",
+    "config/"
+  ],
   "author": "trustgit",
   "license": "MIT",
   "bugs": {
